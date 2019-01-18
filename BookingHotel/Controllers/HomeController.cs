@@ -21,9 +21,14 @@ namespace BookingHotel.Controllers
             return View();
         }
 
-        public ActionResult ModalPopUp()
+        public ActionResult _ModalRegister()
         {
-            return View();
+            return PartialView("_ModalRegister");
+        }
+
+        public ActionResult _ModalLogIn()
+        {
+            return PartialView("_ModalLogIn");
         }
     }
 }

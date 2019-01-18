@@ -1,4 +1,6 @@
 ﻿@using Microsoft.AspNet.Identity
+
+<link href="~/Content/Site.css" rel="stylesheet" />
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
@@ -15,13 +17,13 @@
 }
 else
 {
-        <ul class="nav navbar-nav navbar-right">
-            <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-            <li>@Html.ActionLink("Log in", "Login", "Account", new { id = "loginLink" }, new { @class = "login" })</li>
-        </ul>
         <div class="nav navbar-nav navbar-right">
-            <button id="btnShowModal" type="button"
-                    class="btn btn-sm btn-default pull-left col-lg-11 button button4">
+            <button id="btnShowModalReg" type="button"
+                    class="btn btn-sm btn-default pull-left col-lg-11 button">
+                Register
+            </button>
+            <button id="btnShowModalLog" type="button"
+                    class="btn btn-sm btn-default pull-left col-lg-11 button">
                 Log In
             </button>
         </div>
