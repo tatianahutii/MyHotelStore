@@ -20,5 +20,10 @@ namespace BookingHotel.Controllers
             // возвращаем представление
             return View();
         }
+
+        public ActionResult ModalPopUp()
+        {
+            return View();
+        }
     }
 }

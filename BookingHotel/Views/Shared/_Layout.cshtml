@@ -1,13 +1,19 @@
-﻿<!DOCTYPE html>
+﻿@using BookingHotel.Models
+@model LoginViewModel
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
+
     <script>
         $('#twidget').twidget({
             locale: 'ru',
@@ -27,10 +33,78 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Booking", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <a class="navbar-brand" href='@Url.Action("Index", "Home")'>
+                    <img src="~/Pictures/whiteLogo.png" alt="" />
+                </a>
             </div>
             @Html.Partial("_LoginPartial")
         </div>
+    </div>
+    <div>
+        <fieldset>
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+
+                        <div class="modal fade" tabindex="-1" id="loginModal"
+                             data-keyboard="false" data-backdrop="static">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">
+                                            ×
+                                        </button>
+                                        <h4 class="modal-title">Log in</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="class-for-loginn">
+                                            @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                                            {
+                                                @Html.AntiForgeryToken()
+                                                <h4>Use a local account to log in.</h4>
+                                                <hr />
+                                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                                <div class="form-group">
+                                                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                                                    <div class="col-md-10">
+                                                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                                                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                                                    <div class="col-md-10">
+                                                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-md-offset-2 col-md-10">
+                                                        <div class="checkbox">
+                                                            @Html.CheckBoxFor(m => m.RememberMe)
+                                                            @Html.LabelFor(m => m.RememberMe)
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-md-offset-2 col-md-10">
+                                                        <input type="submit" value="Log in" class="btn btn-primary" />
+                                                    </div>
+                                                </div>
+                                                <p>
+                                                    @Html.ActionLink("Register as a new user", "Register")
+                                                </p>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </fieldset>
     </div>
     <div>
         @RenderBody()
@@ -39,6 +113,10 @@
             <p>&copy; @DateTime.Now.Year - </p>
         </footer>
     </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">  </script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/Scripts/siteJS.js"></script>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

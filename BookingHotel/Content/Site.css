@@ -16,7 +16,10 @@
     white-space: normal;
 }
 
-
+img{
+    width:70px;
+    height:40px;
+}
 .form-group-wrapper{
     display: flex;
     justify-content:space-between;
@@ -36,20 +39,33 @@ label
     color: white;
 }
 
-.class-for-login{
+.class-for-loginn{
     padding: 1%;
     width:500px;
     height:300px;
-    margin-left:50%;
     background-color: rgba(157, 152, 254,0.8);
     border-radius: 20px;
     color: white;
 }
 
-/*h2{
-    margin-left:50%;
+.button {
+    background-color: black;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    width: 80px;
+    height: 50px;
+}
+
+h2{
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-}*/
+}
 
 td{
     padding: 20px;

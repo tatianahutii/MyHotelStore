@@ -1,28 +1,30 @@
-﻿@{
+﻿
+@{
     ViewBag.Title = "Home Page";
     //Layout = null;
 }
+
 <body>
     <section class="myclass">
-        <div class="order-window">          
-               <div class="form-group-wrapper">
-                   <div class="form-group">
-                     <label for="from">Місто</label>
-                     <input type="text" id="from" class="form-control" name="from" placeholder="Місто">
-                   </div>
-                </div>
+        <div class="order-window">
+            <div class="form-group-wrapper">
                 <div class="form-group">
-                    <label for="date">Початок бронювання</label>
-                    <input type="date" id="date" class="form-control" name="date" placeholder="Початок бронювання">
+                    <label for="from">Місто</label>
+                    <input type="text" id="from" class="form-control" name="from" placeholder="Місто">
                 </div>
-                <div class="form-group">
-                    <label for="date">Кінець бронювання</label>
-                    <input type="date" id="date" class="form-control" name="date" placeholder="Кінець бронювання">
-                </div>
+            </div>
+            <div class="form-group">
+                <label for="date">Початок бронювання</label>
+                <input type="date" id="date" class="form-control" name="date" placeholder="Початок бронювання">
+            </div>
+            <div class="form-group">
+                <label for="date">Кінець бронювання</label>
+                <input type="date" id="date" class="form-control" name="date" placeholder="Кінець бронювання">
+            </div>
             <div сlass="btn btn-default">
-                <input type="button" class="btn btn-info pull-right ButtonBuy" value="Знайти"/>
+                <input type="button" class="btn btn-info pull-right ButtonBuy" value="Знайти" />
             </div>
-            </div>
+        </div>
     </section>
     <div>
         <h3>Распродажа книг</h3>
@@ -33,7 +35,7 @@
                 <td><p>Цена</p></td>
                 <td></td>
             </tr>
-            @*@foreach (var b in ViewBag.Hotels)
+            @foreach (var b in ViewBag.Hotels)
             {
                 <tr>
                     <td><p>@b.Name</p></td>
@@ -41,7 +43,8 @@
                     <td><p>@b.Price</p></td>
                     <td><p><a href="/Home/Buy/@b.ID">Купить</a></p></td>
                 </tr>
-            }*@
+            }
         </table>
+        <button class="btn btn-info" data-toggle="modal" data-target="#myModal">Вспывающее окно</button>
     </div>
 </body>
