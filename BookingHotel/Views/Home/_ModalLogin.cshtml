@@ -1,7 +1,8 @@
-﻿@model BookingHotel.Models.LoginViewModel
+﻿@using BookingHotel.Models
+@model BookingHotel.Models.LoginViewModel
 
 <div class="class-for-loginn">
-    @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    @using (Html.BeginForm("_ModalLogIn", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
     {
         @Html.AntiForgeryToken()
         <h4>Use a local account to log in.</h4>
@@ -34,8 +35,11 @@
                 <input type="submit" value="Log in" class="btn btn-primary" />
             </div>
         </div>
-        <p>
-            @Html.ActionLink("Register as a new user", "Register")
+        <p class="link">
+            @Html.ActionLink("Register as a new user", "Register", new { @class = "link" })
         </p>
     }
 </div>
+<section id="socialLoginForm">
+    @Html.Partial("~/Views/Account/_ExternalLoginsListPartial.cshtml", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+</section>

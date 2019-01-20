@@ -325,7 +325,7 @@ namespace BookingHotel.Controllers
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
             if (loginInfo == null)
             {
-                return RedirectToAction("Login");
+                return RedirectToAction("Index");
             }
 
             // Sign in the user with this external login provider if the user already has a login

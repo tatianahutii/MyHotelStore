@@ -25,7 +25,7 @@ namespace BookingHotel
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-                LoginPath = new PathString("/Account/Login"),
+                LoginPath = new PathString("/Home/_ModalLogIn"),
                 Provider = new CookieAuthenticationProvider
                 {
                     // Enables the application to validate the security stamp when the user logs in.
@@ -54,15 +54,15 @@ namespace BookingHotel
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "1162102377298732",
+               appSecret: "7ed3288611ffb2b04e51307029c39cd2");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "800362803324-n34i2rvc2up9jg28p5etcc2ulr507sev.apps.googleusercontent.com",
+                ClientSecret = "T_pRtfpQQ2T-pRpCyVzMputb"
+            });
         }
     }
 }

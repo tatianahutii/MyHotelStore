@@ -16,6 +16,35 @@
     white-space: normal;
 }
 
+.modal-content {
+    background-image: url(/Pictures/modal-window.jpg);
+    background-size: cover;
+    
+}
+
+.botton-margin{
+    margin-left: 170px;
+}
+
+.btn-login {
+    margin-bottom:30px;
+    border-radius: 80px;
+    width: 80px;
+    height: 80px;
+}
+
+.google {
+    background-image: url(/Pictures/Google.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.facebook {
+    background-image: url(/Pictures/Facebook.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 img{
     width:70px;
     height:40px;
@@ -39,8 +68,19 @@ label
     color: white;
 }
 
+.modal-title{
+    color: white;
+    font-size: 20px;
+    text-align: center;
+}
+
+.link{
+    color: #1e041a;
+}
+
 .class-for-loginn{
     padding: 1%;
+    margin-left:5%;
     width:500px;
     height:300px;
     background-color: rgba(157, 152, 254,0.8);
