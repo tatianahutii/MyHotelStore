@@ -1,10 +1,12 @@
-﻿@*@model IEnumerable<BookingHotel.Models.Purchase>*@
+﻿@model IEnumerable<BookingHotel.Models.Purchase>
 
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Index</h2>
+@using (Ajax.BeginForm("PurchTable", new AjaxOptions { UpdateTargetId = "purch_result"}))
+{
 <div class="col-lg-2">
     <p>Діапазон часу замовлення</p>
     <div class="form-group">
@@ -20,11 +22,14 @@
             <input type="date" id="timepurch" class="form-control" name="timepurch" placeholder="Час бронювання">
         </div>
 </div>
-<button id="find" type="submit">Знайти</button>
-<div>
+<div сlass="btn btn-default">
+    <input type="submit" id="search" class="btn btn-info pull-right ButtonBuy" value="Знайти" />
+</div>
+}
+<div id="purch_result">
     @Html.Partial("PurchTable");
 </div>
-<script src="~/Scripts/jquery-3.3.1.js"></script>
+@*<script src="~/Scripts/jquery-3.3.1.js"></script>
 <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 <script src="~/Scripts/bootstrap.min.js"></script>
-<script src="~/Scripts/SiteJS/purchJS.js"></script>
+<script src="~/Scripts/SiteJS/purchJS.js"></script>*@

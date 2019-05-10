@@ -20,22 +20,22 @@ namespace BookingHotel.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Purchases
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            //if (User.IsInRole("admin"))
-            //{
-            //    return View(await db.Purchases.ToListAsync());
-            //}
-            //else
-            //{
-            //    var claim = User.Identity as ClaimsIdentity;
-            //    var userIdClaim = claim.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
-            //    var userIdValue = userIdClaim.Value;
-            //    return View(db.Purchases.Where(a => a.UserId.Contains(userIdValue)));
-            //}
-            return View(db.Purchases.ToList());
+            if (User.IsInRole("admin"))
+            {
+                return View(await db.Purchases.ToListAsync());
+            }
+            else
+            {
+                var claim = User.Identity as ClaimsIdentity;
+                var userIdClaim = claim.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
+                var userIdValue = userIdClaim.Value;
+                return View(db.Purchases.Where(a => a.UserId.Contains(userIdValue)));
+            }
         }
 
+        [Authorize(Roles = "admin")]
         public ActionResult PurchTable(string beginPurch,string endPurch,string beginTimePurch,string endTimePurch)
         {
             DateTime beginPurch_ = DateTime.Parse(beginPurch);
