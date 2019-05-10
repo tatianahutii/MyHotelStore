@@ -25,7 +25,7 @@ namespace BookingHotel
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-                LoginPath = new PathString("/Home/_ModalLogIn"),
+                LoginPath = new PathString("/Account/ModalLogin"),
                 Provider = new CookieAuthenticationProvider
                 {
                     // Enables the application to validate the security stamp when the user logs in.

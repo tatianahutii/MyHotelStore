@@ -1,0 +1,67 @@
+﻿@model IEnumerable<BookingHotel.Models.Purchase>
+@{var sum = 0;
+<table class="table">
+    <tr>
+        <th>
+            Назва
+        </th>
+        <th>
+            Ім'я користувача
+        </th>
+        <th>
+            Початок бронювання
+        </th>
+        <th>
+            Кінець бронювання
+        </th>
+        <th>
+            Рівень комфорту
+        </th>
+        <th>
+            Ціна
+        </th>
+        @if (User.IsInRole("admin"))
+        {
+            <th>
+                Заробіток
+            </th>
+        }
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hotel.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateBegin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateEnd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Room.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            @if (User.IsInRole("admin"))
+            {
+                var salary = item.Price / 100 * item.Earning;
+                sum += salary;
+                <td>
+                    @Html.DisplayFor(modelItem => salary)
+                </td>
+            }
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { id = item.PurchaseId })
+            </td>
+        </tr>
+    }
+</table>
+<h3 align="right">Загальний заробіток: @sum     </h3>
+ }

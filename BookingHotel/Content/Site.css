@@ -1,6 +1,81 @@
-﻿body {
+﻿.flex{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:space-between;
+    background-color: white;
+    margin-top:20px;
+    box-shadow: 0 0 15px rgba(251, 22, 254,0.8);
+    /*border:3px solid rgba(251, 22, 254,0.5)*/
+}
+
+.buy-flex{
+    margin:8px;
+
+}
+
+.buy{
+    text-align:center;
+    background-color: rgba(251, 22, 254,0.5);
+}
+
+.cartIcon{
+    width:40px;
+    height:40px;
+}
+
+body {
     padding-top: 50px;
     padding-bottom: 20px;
+}
+
+.block{
+    display: block;
+    opacity: 1;
+    -webkit-transform: scale(1,1);
+    -webkit-transition-timing-function: ease-out;
+    -webkit-transition-duration: 550ms;
+    -moz-transform: scale(1,1);
+    -moz-transition-timing-function: ease-out;
+    -moz-transition-duration: 550ms;
+}
+
+.block:hover {
+    -webkit-transform: scale(1.07,1.07);
+    -webkit-transition-timing-function: ease-out;
+    -webkit-transition-duration: 550ms;
+    -moz-transform: scale(1.07,1.07);
+    -moz-transition-timing-function: ease-out;
+    -moz-transition-duration: 550ms;
+}
+
+.confirm-text{
+   color: white;
+}
+
+.bange-size{
+    width:70px;
+    height:30px;
+    border-radius:20px;
+    background-color: rgba(157, 152, 254,0.6);
+    border:1px solid rgba(0, 0, 0,0.1);
+    color: rgba(0, 0, 0,0.7);
+}
+
+.text{
+    font-size:16px;
+    font-family:cursive;
+    text-align:center;
+}
+
+.img-size{
+    width:150px;
+    height:150px;
+    margin:10px;
+}
+
+.search-conrainer{
+    width:90%
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -8,6 +83,47 @@
     padding-left: 15px;
     padding-right: 15px;
 }
+
+.button-logo{
+    height: 25px;
+    width: 25px;
+}
+
+.delete {
+    background-image: url(/Pictures/delete2.png);
+}
+
+.edit {
+    background-image: url('../Pictures/edit2.png');
+}
+
+
+.details {
+    background-image: url('../Pictures/details2.jpg');
+}
+
+#register{
+    display: none;
+}
+
+#login{
+    display: none;
+}
+
+img{
+    display:inline-block;
+    height:auto;
+    max-width:100%;
+}
+
+#loading{
+    height:200px;
+    width:200px;
+    margin-top:3%;
+    margin-left:40%;
+    display:none;
+}
+
 
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
@@ -18,8 +134,7 @@
 
 .modal-content {
     background-image: url(/Pictures/modal-window.jpg);
-    background-size: cover;
-    
+    background-size: cover;    
 }
 
 .botton-margin{

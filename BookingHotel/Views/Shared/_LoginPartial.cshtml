@@ -8,24 +8,51 @@
         @Html.AntiForgeryToken()
 
         <ul class="nav navbar-nav navbar-right">
+            @if (User.IsInRole("admin"))
+            {
+            <li>
+                @Html.ActionLink("BlackList", "Index", "BlackLists");
+            </li>
+            <li>
+                @Html.ActionLink("Purchases", "Index", "Purchases");
+            </li>
+            <li>
+                @Html.ActionLink("Flat", "Index", "Hotels");               
+            </li>
+            <li>
+                @Html.ActionLink("Room", "Index", "Rooms");
+            </li>
+            <li>
+                @Html.ActionLink("HotelRomms", "Index", "HotelsRooms");
+            </li>
+            }
+            @if (User.IsInRole("user"))
+            {
+                <li>
+                    <a class="navbar-brand" href='@Url.Action("Index", "Purchases")'>
+                        <img class="cartIcon" src="~/Pictures/cartIcon.png" alt="" />
+                    </a>
+                </li>
+            }
             <li>
                 @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
             </li>
             <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
         </ul>
+
     }
 }
 else
 {
         <div class="nav navbar-nav navbar-right">
-            <button id="btnShowModalReg" type="button"
-                    class="btn btn-sm btn-default pull-left col-lg-11 button">
-                Register
-            </button>
-            <button id="btnShowModalLog" type="button"
-                    class="btn btn-sm btn-default pull-left col-lg-11 button">
-                Log In
-            </button>
+                <button id="btnShowModalRegister" type="button"
+                        class="btn btn-sm btn-default pull-left col-lg-11 button">
+                    Register
+                </button>
+                <button id="btnShowModalLogin"  type="button"
+                        class="btn btn-sm btn-default pull-left col-lg-11 button">
+                    Log In
+                </button>
         </div>
 
 }

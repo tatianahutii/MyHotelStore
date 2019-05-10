@@ -1,5 +1,4 @@
 ﻿@using BookingHotel.Models
-@model LoginViewModel
 
 <!DOCTYPE html>
 <html>
@@ -13,17 +12,6 @@
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
-    <script>
-        $('#twidget').twidget({
-            locale: 'ru',
-            marker: 78606,
-            type: 'avia_hotel',
-            open_in_new_tab: false,
-            default_origin: 'жуковский',
-            default_destination: 'belgorod',
-            default_hotel_location: 'prague'
-        });
-    </script>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -45,7 +33,7 @@
                 <div class="row">
                     <div class="col-xs-12">
 
-                        <div class="modal fade" tabindex="-1" id="loginModal1"
+                        <div class="modal fade" tabindex="-1" id="loginModal"
                              data-keyboard="false" data-backdrop="static">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
@@ -53,31 +41,19 @@
                                         <button type="button" class="close" data-dismiss="modal">
                                             X
                                         </button>
-                                        <h4 class="modal-title">Log in</h4>
+                                        <h4 class="modal-title"></h4>
                                     </div>
                                     <div class="modal-body">
-                                        @{ Html.RenderAction("_ModalLogIn");}
+                                        <div id="login">
+                                            @{Html.RenderAction("ModalLogin", "Account");}
+                                        </div>
+                                        <div id="register">
+                                            @{Html.RenderAction("ModalRegister", "Account");}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                            <div class="modal fade" tabindex="-1" id="loginModal"
-                                 data-keyboard="false" data-backdrop="static">
-                                <div class="modal-dialog modal-lg">
-                                    <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal">
-                                                    X
-                                                </button>
-                                                <h4 class="modal-title">Register</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                @{Html.RenderAction("_ModalRegister");}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                     </div>
                 </div>
             </div>
@@ -90,11 +66,13 @@
             <p>&copy; @DateTime.Now.Year - </p>
         </footer>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-    <script src="~/Scripts/siteJS.js"></script>
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/SiteJS/siteJS.js"></script>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jqueryval")
     @RenderSection("scripts", required: false)
 </body>
 </html>

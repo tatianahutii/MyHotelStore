@@ -278,6 +278,7 @@ namespace BookingHotel.Controllers
 
         //
         // GET: /Manage/ManageLogins
+        [Authorize(Roles ="admin")]
         public async Task<ActionResult> ManageLogins(ManageMessageId? message)
         {
             ViewBag.StatusMessage =

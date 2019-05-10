@@ -1,0 +1,156 @@
+﻿@model IEnumerable<BookingHotel.Models.Hotel>
+@if (Model!=null)
+{
+    foreach (var item in Model)
+    {
+    <div class="container text">
+        <div class="block">
+            <div class="row flex">
+                <input type="hidden" id="@item.ID" name="HotelID" />
+                <div class="col-md-pull-6">
+                    <div id="picture">
+
+                        @Html.Raw("<img class=\"img-size rounded\" src=\"data:image/jpeg;base64,"
+                                     + Convert.ToBase64String(item.Image) + "\" />")
+                    </div>
+                </div>
+                <div class="col-md-pull-6">
+                    <div id="name">
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </div>
+                </div>
+                <div class="col-md-pull-6">
+                    <div id="city">
+                        @Html.DisplayFor(modelItem => item.City)
+                    </div>
+                </div>
+                <div class="col-md-pull-6">
+                        <div class="text">
+                            <div id="price">
+                                @if (item.Discount != 0)
+                                {
+                                    <strike style="color:red">
+                                        @Html.DisplayFor(modelItem => item.Price)
+                                    </strike>
+                                    var count = (item.Price * (100- item.Discount)) / 100;
+                                    @Html.DisplayFor(modelItem => count);
+                                }
+                                else
+                                {
+                                    @Html.DisplayFor(modelItem => item.Price);
+                                }
+
+                           </div>
+                        </div>
+                </div>
+                <div class="col-md-pull-6">
+                    @foreach (var room in item.HotelsRooms)
+                    {
+                        <div class="row buy-flex">
+                            <input type="hidden" id="@room.Id" name="RoomId" />
+                            <input type="hidden" id="@room.Name" name="RoomName" />
+                            <input type="hidden" id="@room.Price" name="RoomPrice" />
+                            <div class="col-lg-4 room">
+                                @Html.DisplayFor(modelItem => room.Name)
+                            </div>
+                            <div class="col-lg-4">
+                                @Html.DisplayFor(modelItem => room.Price)$
+                            </div>
+                            <div class="col-lg-4">
+                                @if ((User.IsInRole("user") || User.IsInRole("admin")) && room.Price!=0)
+                                {
+                                    <button type="submit" class="purch buy disabled">Замовити</button>
+                                }
+                                else if (room.Price == 0)
+                                {
+                                    <span>Немає вільних місць</span>
+                                }
+                            </div>
+                            </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" tabindex="-1" id="purchcases"
+             data-keyboard="false" data-backdrop="static">
+        </div>
+    </div>
+    }
+}
+<script>
+    var ID = undefined;
+    var UserId = undefined;
+    var RoomId_ = undefined;
+    var Price = undefined;
+
+    $(".purch").click(function () {
+        var beginDate = document.getElementById('datebegin').value;
+        var endDate = document.getElementById('dateend').value;
+        var d = this.parentNode.parentNode.parentNode.parentNode.childNodes[1].id;
+        var r = this.parentNode.parentNode.childNodes[1].id;
+        var room_name = this.parentNode.parentNode.childNodes[3].id;
+        var room_price = this.parentNode.parentNode.childNodes[5].id;
+        var data = { 'HotelId': d, 'RoomId': r, 'BeginDate': beginDate, 'EndDate': endDate };
+        $.ajax({
+            url: 'Purchases/Purchase',
+            data: data,
+            contentType: 'application/json',
+            dataType: "json",
+            success: function (result) {
+                $("#purchcases").modal('show');
+                var bd = new Date(document.getElementById('datebegin').value);
+                var ed = new Date(document.getElementById('dateend').value);
+                var time = ed - bd;
+                var countOfDay = time / (1000 * 60 * 60 * 24) + 1;
+                var arrtime = (result.DateBegin).split("-");
+                var day = arrtime[2].split('T');
+                var arrtimeEnd = (result.DateEnd).split("-");
+                var dayEnd = arrtimeEnd[2].split('T');
+                document.getElementById("purchcases").innerHTML = "<div class=\"modal-dialog modal-lg\">" +
+            "<div class=\"modal-content\">" +
+                "<div class=\"modal-header\">" +
+                    "<button type=\"button\" class=\"close\" data-dismiss=\"modal\">" +
+                       "X" +
+                    "</button>" +
+                    "<h4 class=\"modal-title\"> Перевірте дані замовлення</h4>" +
+                "</div>" +
+                "<div class=\"modal-body confirm-text\">" +
+                    "<div>" + "Назва готелю: " + result.Hotel.Name +
+                    "</div>" +
+                    "<div>" + "Рівень комформу номера: " + room_name +
+                    "</div>" +
+                    "<div>" + "Ціна: " + room_price * countOfDay +
+                    "</div>" +
+                    "<div>" + "Початок бронювання: " + day[0] + "-" + arrtime[1] + "-" + arrtime[0] +
+                    "</div>" +
+                    "<div>" + "Кінець бронювання: " + dayEnd[0] + "-" + arrtimeEnd[1] + "-" + arrtimeEnd[0] +
+                    "</div></div>" +
+                    "<button type=\"submit\" class=\"btn btn-dark \" onclick=\"ConfirmFunc()\" data-dismiss=\"modal\" id=\"confirm\">Підтвердити</button>" +
+                    "<span> </span>" +
+                    "<button type=\"submit\" class=\"btn btn-dark \" data-dismiss=\"modal\">Скасувати</button>" +
+                "</div>" +
+            "</div>" +
+        "</div>"
+                ID = result.HotelsID;
+                UserId = result.UserId;
+                RoomId_ = result.RoomId;
+                Price = room_price * countOfDay;
+            }
+        })
+    });
+
+    function ConfirmFunc() {
+        var beginDate = document.getElementById('datebegin').value;
+        var endDate = document.getElementById('dateend').value;
+        var data = { 'HotelId': ID, 'RoomId': RoomId_, 'Price': Price, 'BeginDate': beginDate, 'EndDate': endDate };
+        $.ajax({
+            url: 'Purchases/Create',
+            data: data,
+            contentType: 'application/json',
+            dataType: "json",
+            success: function () {
+            }
+        });
+    };
+
+</script >
