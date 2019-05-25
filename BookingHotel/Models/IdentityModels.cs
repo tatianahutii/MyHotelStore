@@ -12,6 +12,10 @@ using Newtonsoft.Json;
 
 namespace BookingHotel.Models
 {
+    public enum State
+    {  Заброньовано, Скасовано,  Здіснене, Не_здійснене};
+        
+
     public class BlackList
     {
         [Key]
@@ -40,6 +44,8 @@ namespace BookingHotel.Models
         }
     }
 
+    
+
     [JsonObject(IsReference = true)]
     public class Hotel
     {
@@ -47,10 +53,7 @@ namespace BookingHotel.Models
         public int ID { get; set; }
         public string Name { get; set; }
         public string City { get; set; }
-        public int Price { get; set; }
-        public string Country { get; set; }
         public byte[] Image { get; set; }
-        public int Discount { get; set; }
         public virtual ICollection<Room> HotelsRooms { get; set; }
 
         public Hotel()
@@ -114,6 +117,8 @@ namespace BookingHotel.Models
         public int Price { get; set; }
 
         public int Earning { get; set; }
+
+        public State PurchState { get; set; }
 
         [DataType(DataType.Date)]
         public DateTime TimeOfPurch { get; set; }

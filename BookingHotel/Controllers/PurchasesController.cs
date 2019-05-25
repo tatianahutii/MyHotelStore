@@ -35,18 +35,39 @@ namespace BookingHotel.Controllers
             }
         }
 
-        [Authorize(Roles = "admin")]
-        public ActionResult PurchTable(string beginPurch,string endPurch,string beginTimePurch,string endTimePurch)
+        //[Authorize(Roles = "admin")]
+        public ActionResult PurchTable(string beginPurch,string endPurch,string beginTimePurch,string endTimePurch,string userLogin, State userState)
         {
-            DateTime beginPurch_ = DateTime.Parse(beginPurch);
-            DateTime endPurch_ = DateTime.Parse(endPurch);
-            //DateTime beginTimePurch_ = DateTime.Parse(beginTimePurch);
-            //DateTime endTimePurch_ = DateTime.Parse(endTimePurch);
+            if (User.IsInRole("user"))
+            {
+                userLogin = User.Identity.Name;
+            }
+            DateTime beginPurch_ = new DateTime();
+            DateTime endPurch_ = DateTime.Now;
+            DateTime beginTimePurch_ = new DateTime();
+            DateTime endTimePurch_= DateTime.Now;
+            if (beginPurch!="")
+            {
+                beginPurch_ = DateTime.Parse(beginPurch);
+            }
+            if (endPurch != "")
+            {
+                endPurch_ = DateTime.Parse(endPurch);
+            }
+            if (beginTimePurch != "")
+            {
+                beginTimePurch_ = DateTime.Parse(beginTimePurch);
+            }
+            if (endTimePurch != "")
+            {
+                endTimePurch_ = DateTime.Parse(endTimePurch);
+            }            
             var purch = db.Purchases.Where(a => (a.DateBegin >= beginPurch_ &&
-                                              a.DateEnd <= endPurch_ /*&&
+                                              a.DateEnd <= endPurch_ &&
                                               a.TimeOfPurch >= beginTimePurch_ &&
-                                              a.TimeOfPurch <= endTimePurch_*/)).ToList();
-            return PartialView(purch);
+                                              a.TimeOfPurch <= endTimePurch_)).ToList();
+            var result = purch.Where(a=>a.User.Email.Contains(userLogin) && a.PurchState==userState).ToList();
+            return PartialView(result);
         }
 
         // GET: Purchases/Details/5
@@ -160,11 +181,13 @@ namespace BookingHotel.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "PurchaseId,UserID,HotelId,DateBegin,DateEnd")] Purchase purchase)
+        public async Task<ActionResult> Edit([Bind(Include = "PurchaseId,PurchState")] Purchase purchase )
         {
             if (ModelState.IsValid)
             {
-                db.Entry(purchase).State = EntityState.Modified;
+                Purchase newPurcahse = db.Purchases.Where(i => i.PurchaseId == purchase.PurchaseId).FirstOrDefault();
+                newPurcahse.PurchState = purchase.PurchState;
+                db.Entry(newPurcahse).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }

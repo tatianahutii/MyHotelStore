@@ -63,20 +63,20 @@ namespace BookingHotel.Controllers
             DateTime endDate = DateTime.Parse(end);
             string room = "";
             var hotels = db.Hotels.Where(a => a.Name.Contains(name)).ToList();
-            hotels = hotels.Where(a => a.Country.Contains(country)).ToList();
             hotels = hotels.Where(a => a.City.Contains(city)).ToList();
+            var PurchState = State.Заброньовано;
             foreach(var hotel_ in hotels)
             {
                 foreach(var room_ in hotel_.HotelsRooms)
                 {
                     var purch = db.Purchases.Where(a => (a.Hotel.Name.Contains(name) &&
                                                          a.Hotel.City.Contains(city) &&
-                                                         a.Hotel.Country.Contains(country) &&
                                                          a.Room.Name==room_.Name &&
                                                          a.Room.Name.Contains(room) &&
                                                          ((a.DateBegin <= beginDate && a.DateEnd >= endDate) ||
                                                          (a.DateBegin<=beginDate && a.DateEnd>=beginDate) ||
-                                                         (a.DateBegin>=beginDate && a.DateBegin<=endDate)))).ToList();
+                                                         (a.DateBegin>=beginDate && a.DateBegin<=endDate))&&
+                                                         (a.PurchState== PurchState))).ToList();
                     int purchCount = purch.Count;
                     var hotelsroom = db.HotelsRoomses.Where(a => (a.Hotel.Name.Contains(hotel_.Name) && a.Room.Name.Contains(room_.Name))).ToList();
                     int count;

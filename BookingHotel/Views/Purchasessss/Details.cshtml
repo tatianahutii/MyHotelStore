@@ -1,0 +1,98 @@
+﻿@model BookingHotel.Models.Purchase
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>Purchase</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Room.Name)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Room.Name)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.User.Email)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.User.Email)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.HotelsID)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.HotelsID)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.DateBegin)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.DateBegin)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.DateEnd)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.DateEnd)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Price)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Price)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Earning)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Earning)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.PurchState)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.PurchState)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.TimeOfPurch)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.TimeOfPurch)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.PurchaseId }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

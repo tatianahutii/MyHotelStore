@@ -54,7 +54,7 @@ namespace BookingHotel.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Name,City,Price,Country,Discount")] Hotel hotel, HttpPostedFileBase uploadImage)
+        public ActionResult Create([Bind(Include = "ID,Name,City")] Hotel hotel, HttpPostedFileBase uploadImage)
         {
             if (ModelState.IsValid && uploadImage!=null)
             {
@@ -96,14 +96,11 @@ namespace BookingHotel.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Name,City,Price,Country,Discount")] Hotel hotel, int?[] selectedRoom)
+        public ActionResult Edit([Bind(Include = "ID,Name,City")] Hotel hotel, int?[] selectedRoom)
         {
             Hotel newHotel = db.Hotels.Find(hotel.ID);
             newHotel.Name = hotel.Name;
             newHotel.City = hotel.City;
-            newHotel.Country = hotel.Country;
-            newHotel.Discount = hotel.Discount;
-            newHotel.Price = hotel.Price;
 
             newHotel.HotelsRooms.Clear();
             if (selectedRoom != null)

@@ -18,12 +18,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.City)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Country)
-            </th>
             <th></th>
         </tr>
 
@@ -35,12 +29,6 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.City)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Country)
                 </td>
                 <td>
                     <a href='@Url.Action("Edit", new { id = item.ID })'><img class="button-logo" src="~/Pictures/edit2.png" /></a> |

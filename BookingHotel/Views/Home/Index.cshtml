@@ -4,47 +4,64 @@
     //Layout = null;
 }
 
+<link rel="stylesheet" href="ui/jquery-ui.css">
 <body>
-            @using (Ajax.BeginForm("SearchHotel", new AjaxOptions { UpdateTargetId = "results", LoadingElementId="loading", LoadingElementDuration=10}))
-            {
-               <section class="myclass">
-                     <div class="order-window">
-                         <div class="form-group-wrapper">
-                             <div class="form-group">
-                                <input type="text" id="from" class="form-control" name="name" placeholder="Назва" >
-                            </div>
-                        </div>
-                         <div class="form-group-wrapper">
-                             <div class="form-group">
-                                 <input type="text" id="from" class="form-control" name="city" placeholder="Місто">
-                            </div>
-                         </div>
-                         <div class="form-group-wrapper">
-                             <div class="form-group">
-                                 <input type="text" id="from" class="form-control" name="country" placeholder="Країна">
-                             </div>
-                         </div>
-                         <div class="form-group">
-                             <input type="date" id="datebegin" class="form-control" name="begin" placeholder="Початок бронювання">
-                         </div>
-                         <div class="form-group">
-                             @*<label for="date">Кінець бронювання</label>*@
-                             <input type="date" id="dateend" class="form-control" name="end" placeholder="Кінець бронювання">
-                         </div>
-
-                         <div сlass="btn btn-default">
-                       <input type="submit" id="search"class="btn btn-info pull-right ButtonBuy" value="Знайти" />
+    @using (Ajax.BeginForm("SearchHotel", new AjaxOptions { UpdateTargetId = "results", LoadingElementId = "loading", LoadingElementDuration = 10 }))
+    {
+        <section class="myclass">
+            <div class="order-window">
+                <div class="form-group-wrapper">
+                    <div class="form-group">
+                        <input type="text" id="from" class="form-control" name="name" placeholder="Назва">
                     </div>
-                    </div>
-              </section>
-            }
-            <div id="results">
-                <div id="scrolList">
-                    @Html.Partial("SearchHotel");
                 </div>
-            <div id="loading">
-                <img src="@Url.Content("~/Pictures/loading.gif")" />
-            </div>                                 
+                <div class="form-group-wrapper">
+                    <div class="form-group">
+                        <input type="text" id="from" class="form-control" name="city" placeholder="Місто">
+                    </div>
+                </div>
+                <div class="form-group-wrapper">
+                    <div class="form-group">
+                        <input class="form-control" name="price" id="price">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="date" id="datebegin" class="form-control" name="begin" placeholder="Початок бронювання">
+                </div>
+                <div class="form-group">
+                    <input type="date" id="dateend" class="form-control" name="end" placeholder="Кінець бронювання">
+                </div>
+
+                <div сlass="btn btn-default">
+                    <input type="submit" id="search" class="btn btn-info pull-right ButtonBuy" value="Знайти" />
+                </div>
+            </div>
+</section>
+    }
+    <div id="results">
+        <div id="scrolList">
+            @Html.Partial("SearchHotel");
         </div>
-  
+        <div id="loading">
+            <img src="@Url.Content("~/Pictures/loading.gif")" />
+        </div>
+    </div>
+    <script src="ui/jquery-ui.js"></script>
+    <script>
+        $(function () {
+
+            $("#slider-range").slider({
+                range: true,
+                min: 0,
+                max: 1000,
+                values: [75, 300],
+                slide: function (event, ui) {
+                    $("#price").val("$" + ui.values[0] + " - $" + ui.values[1]);
+                }
+            });
+            $("#price").val("$" + $("#slider-range").slider("values", 0) +
+            " - $" + $("#slider-range").slider("values", 1));
+
+        });
+    </script>
 </body>

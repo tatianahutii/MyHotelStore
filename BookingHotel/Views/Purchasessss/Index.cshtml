@@ -1,0 +1,89 @@
+﻿@model IEnumerable<BookingHotel.Models.Purchase>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Room.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HotelsID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateBegin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateEnd)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Earning)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PurchState)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TimeOfPurch)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Room.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HotelsID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateBegin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateEnd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Earning)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PurchState)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TimeOfPurch)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.PurchaseId }) |
+                @Html.ActionLink("Details", "Details", new { id=item.PurchaseId }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.PurchaseId })
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

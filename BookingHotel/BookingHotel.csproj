@@ -256,6 +256,18 @@
     <Compile Include="Migrations\201905071830274_timeOfPurch.Designer.cs">
       <DependentUpon>201905071830274_timeOfPurch.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905221700412_State.cs" />
+    <Compile Include="Migrations\201905221700412_State.Designer.cs">
+      <DependentUpon>201905221700412_State.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905251148491_hotelPriceandCountry.cs" />
+    <Compile Include="Migrations\201905251148491_hotelPriceandCountry.Designer.cs">
+      <DependentUpon>201905251148491_hotelPriceandCountry.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905251210209_hotelDiscount.cs" />
+    <Compile Include="Migrations\201905251210209_hotelDiscount.Designer.cs">
+      <DependentUpon>201905251210209_hotelDiscount.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -370,6 +382,12 @@
     <Content Include="Views\Hotels\Edit.cshtml" />
     <Content Include="Views\Hotels\Index.cshtml" />
     <Content Include="Views\Purchases\PurchTable.cshtml" />
+    <Content Include="Views\Purchasessss\Create.cshtml" />
+    <Content Include="Views\Purchasessss\Delete.cshtml" />
+    <Content Include="Views\Purchasessss\Details.cshtml" />
+    <Content Include="Views\Purchasessss\Edit.cshtml" />
+    <Content Include="Views\Purchasessss\Index.cshtml" />
+    <Content Include="Views\Purchases\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -404,6 +422,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201905071830274_timeOfPurch.resx">
       <DependentUpon>201905071830274_timeOfPurch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905221700412_State.resx">
+      <DependentUpon>201905221700412_State.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905251148491_hotelPriceandCountry.resx">
+      <DependentUpon>201905251148491_hotelPriceandCountry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905251210209_hotelDiscount.resx">
+      <DependentUpon>201905251210209_hotelDiscount.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

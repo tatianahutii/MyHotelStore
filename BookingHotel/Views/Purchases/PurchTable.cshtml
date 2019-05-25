@@ -1,33 +1,41 @@
 ﻿@model IEnumerable<BookingHotel.Models.Purchase>
 @{var sum = 0;
-<table class="table">
-    <tr>
-        <th>
-            Назва
-        </th>
-        <th>
-            Ім'я користувача
-        </th>
-        <th>
-            Початок бронювання
-        </th>
-        <th>
-            Кінець бронювання
-        </th>
-        <th>
-            Рівень комфорту
-        </th>
-        <th>
-            Ціна
-        </th>
-        @if (User.IsInRole("admin"))
-        {
+<table class="table table-sm table-striped " style="font-size:16px">
+    <thead class="thead-dark">
+        <tr>
             <th>
-                Заробіток
+                Назва
             </th>
-        }
-        <th></th>
-    </tr>
+            <th>
+                Ім'я користувача
+            </th>
+            <th>
+                Початок бронювання
+            </th>
+            <th>
+                Кінець бронювання
+            </th>
+            <th>
+                Рівень комфорту
+            </th>
+            <th>
+                Час здійснення замовлення
+            </th>
+            <th>
+                Ціна
+            </th>
+            <th>
+                Стан
+            </th>
+            @if (User.IsInRole("admin"))
+            {
+                <th>
+                    Заробіток
+                </th>
+            }
+            <th></th>
+        </tr>
+    </thead>
     @foreach (var item in Model)
     {
         <tr>
@@ -47,7 +55,13 @@
                 @Html.DisplayFor(modelItem => item.Room.Name)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.TimeOfPurch)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PurchState)
             </td>
             @if (User.IsInRole("admin"))
             {
@@ -56,12 +70,16 @@
                 <td>
                     @Html.DisplayFor(modelItem => salary)
                 </td>
+                <td>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.PurchaseId })
+                    @Html.ActionLink("Edit", "Edit", new { id = item.PurchaseId })
+                </td>
             }
-            <td>
-                @Html.ActionLink("Delete", "Delete", new { id = item.PurchaseId })
-            </td>
         </tr>
     }
 </table>
-<h3 align="right">Загальний заробіток: @sum     </h3>
- }
+    if (User.IsInRole("admin"))
+    {
+        <h3 align="right">Загальний заробіток: @sum     </h3>
+    }
+}

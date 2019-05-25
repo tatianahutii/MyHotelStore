@@ -1,35 +1,59 @@
-﻿@model IEnumerable<BookingHotel.Models.Purchase>
+﻿@using BookingHotel.Models
+@model IEnumerable<BookingHotel.Models.Purchase>
+
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Список замовлень";
 }
-
-<h2>Index</h2>
-@using (Ajax.BeginForm("PurchTable", new AjaxOptions { UpdateTargetId = "purch_result"}))
+<br />
+<h1 style="margin:20px;"><i>Список замовлень:</i></h1>
+@using (Ajax.BeginForm("PurchTable", new AjaxOptions { UpdateTargetId = "purch_result" }))
 {
-<div class="col-lg-2">
-    <p>Діапазон часу замовлення</p>
-    <div class="form-group">
-        <input type="date" id="beginpurch" class="form-control" name="beginpurch" placeholder="Початок бронювання">
-    </div>
-    <div class="form-group">
-        <input type="date" id="endpurch" class="form-control" name="endpurch" placeholder="Кінець бронювання">
-    </div>
-</div>
-<div class="col-lg-2">
-    <p>Час здійснення замовлення</p>
+    <div class="col-lg-3">
+        <p>Діапазон часу замовлення</p>
         <div class="form-group">
-            <input type="date" id="timepurch" class="form-control" name="timepurch" placeholder="Час бронювання">
+            <input type="date" id="beginpurch" class="form-control" name="beginpurch" placeholder="Початок бронювання">
         </div>
-</div>
-<div сlass="btn btn-default">
-    <input type="submit" id="search" class="btn btn-info pull-right ButtonBuy" value="Знайти" />
-</div>
+        <div class="form-group">
+            <input type="date" id="endpurch" class="form-control" name="endpurch" placeholder="Кінець бронювання">
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <p>Час здійснення замовлення</p>
+        <div class="form-group">
+            <input type="date" id="timepurch" class="form-control" name="beginTimePurch" placeholder="Час бронювання">
+        </div>
+        <div class="form-group">
+            <input type="date" id="timepurch" class="form-control" name="endTimePurch" placeholder="Час бронювання">
+        </div>
+    </div>
+    if (User.IsInRole("admin"))
+    {
+        <div class="col-lg-3">
+            <p>Логін замовника</p>
+            <div class="form-group">
+                <input type="text" id="userlogin" class="form-control" name="userLogin" placeholder="Логін">
+            </div>
+        </div>
+    }
+
+    <div class="col-lg-3">
+        <p>Стан замовлення</p>
+        @Html.DropDownList("userState",
+                    new SelectList(Enum.GetValues(typeof(State))),
+                    new { @class = "form-control" })
+    </div>
+    <br />
+    <div class="row" style="margin-right:50px; margin-top:100px;">
+        <div сlass="btn btn-default" style="width:100px;">
+            <input type="submit" id="search" class="btn btn-info pull-right ButtonBuy" value="Знайти" />
+        </div>
+    </div>
 }
 <div id="purch_result">
-    @Html.Partial("PurchTable");
+     @Html.Partial("PurchTable");
 </div>
 @*<script src="~/Scripts/jquery-3.3.1.js"></script>
-<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
-<script src="~/Scripts/bootstrap.min.js"></script>
-<script src="~/Scripts/SiteJS/purchJS.js"></script>*@
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/SiteJS/purchJS.js"></script>*@
